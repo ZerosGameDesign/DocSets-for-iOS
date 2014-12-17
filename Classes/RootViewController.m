@@ -61,8 +61,11 @@
 														  otherButtonTitles:NSLocalizedString(@"Download...", nil), nil];
 			firstUseAlert.tag = FIRST_USE_ALERT_TAG;
 			[firstUseAlert show];
-		}
+        }
 	});
+    
+    [self updateEditButton];
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -106,7 +109,21 @@
 {
 	if (!self.editing) {
 		[self.tableView reloadData];
+        
 	}
+    
+    [self updateEditButton];
+    
+    
+}
+
+
+-(void)updateEditButton {
+    if ([self tableView:self.tableView numberOfRowsInSection:0] > 0) {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }else {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
 }
 
 #pragma mark -
